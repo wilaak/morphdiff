@@ -1,13 +1,15 @@
-# Morphdiff (PHP)
+# mdfp
+
+Diffs two HTML buffers and emits the minimal patches needed to morph a live DOM into the new state.
 
 ```php
-require 'morphdiff.php';
+require 'mdfp.php';
 
 //
 // One-shot comparison
 //
 
-$ops = morphdiff\compare($old_html, $new_html);
+$ops = mdfp\compare($old_html, $new_html);
 foreach ($ops as $op) {
     // $op['selector']  CSS selector to patch (#id or a structural path)
     // $op['html']      the element's new outer HTML
@@ -19,13 +21,13 @@ foreach ($ops as $op) {
 // Incremental patches
 //
 
-$v = morphdiff\view_new($initial_html);
+$v = mdfp\view_new($initial_html);
 
 for (;;) {
     // $next = your_page_renderer();
     $next = '<html><body><p id="price">42.10</p></body></html>';
 
-    $ops = morphdiff\view_update($v, $next);   // $v holds the prior render
+    $ops = mdfp\view_update($v, $next);   // $v holds the prior render
 
     // send_patches_to_client($ops);
     //
@@ -36,5 +38,3 @@ for (;;) {
     // }
 }
 ```
-
-An identical render returns `[]`. `view_update` takes the view by reference, so capture it with `use (&$v)`, not an arrow function.
