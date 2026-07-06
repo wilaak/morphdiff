@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace mdfp;
+namespace morphdiff;
 
 final class Tag
 {
@@ -31,11 +31,8 @@ final class Tag
 final class V
 {
     public const int HTML  = 0;
-
     public const int SEL   = 1;
-
     public const int START = 2;
-
     public const int END   = 3;
 }
 
@@ -88,11 +85,8 @@ function scan(string $html, array &$sel, array &$start, array &$end): void
     $n = \strlen($html);
 
     $s_tag   = [];
-
     $s_start = [];
-
     $s_path  = [];
-
     $s_count = [];
 
     $depth  = 0;
